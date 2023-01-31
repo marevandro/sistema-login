@@ -6,13 +6,14 @@ export function Botao({
     type,
     text,
     onClick,
-    //disable,
+    disabled,
 }){
     return(
         <BotaoCustomizado
             type={type}
             text={text}
             onClick={onClick} 
+            disabled={disabled}
         >
             {text}
         </BotaoCustomizado>

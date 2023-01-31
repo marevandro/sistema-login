@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Botao } from "../../Components/Botao";
 import Input from "../../Components/Input";
+import UserService from "../../Service/UserService";
 import { validarEmail, validarSenha } from "../../Utils/validadores";
 import { Container, Form } from "./styles";
 
+const  userService = new UserService()
 
 export function Login() {
     const [loading, setLoading] = useState();
@@ -13,18 +15,20 @@ export function Login() {
         e.preventDefault();
         try {
             setLoading(true)
-            alert('Login')
+            const response = await userService.login(form)
+            console.log('response do Login', response)
+            if(response === true) {
+              alert('Usuário logado com SUCESSO!')
+            }
             setLoading(false)
         }
         catch (err) {
-            alert('Algo deu errado com o Login' + err)
+            alert('Algo deu errado com o Login ' + err)
         }
 
     }
     const handleChange = (event) => {
-        console.log('Digitando...', event.target.name, event.target.value)
         setForm({ ...form, [event.target.name]: event.target.value })
-        console.log(form, "linha 27")
     }
 
     const validadorInput = () => {
@@ -52,6 +56,7 @@ export function Login() {
                     type='submit'
                     text='Entrar!'
                     onClick={handleSubmit}
+                    disabled={loading === true || !validadorInput()}
                 />
                 <div>
                     <p>Não possui conta?</p>
