@@ -4,12 +4,14 @@ import Input from "../../Components/Input";
 import UserService from "../../Service/UserService";
 import { validarEmail, validarSenha } from "../../Utils/validadores";
 import { Container, Form } from "./styles";
+import { NavLink, useNavigate } from 'react-router-dom'
 
-const  userService = new UserService()
+const userService = new UserService()
 
 export function Login() {
     const [loading, setLoading] = useState();
     const [form, setForm] = useState([]);
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,8 +19,8 @@ export function Login() {
             setLoading(true)
             const response = await userService.login(form)
             console.log('response do Login', response)
-            if(response === true) {
-              alert('Usuário logado com SUCESSO!')
+            if (response === true) {
+                alert('Usuário logado com SUCESSO!')
             }
             setLoading(false)
         }
@@ -35,7 +37,6 @@ export function Login() {
         return validarEmail(form.email) && validarSenha(form.password)
     }
 
-    console.log('Form está valido? ', validadorInput())
     return (
         <Container>
             <Form>
