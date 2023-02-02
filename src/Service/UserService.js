@@ -13,7 +13,7 @@ export default class UserService {
         if(data){
             localStorage.setItem("nome", data.user.nome)
             localStorage.setItem("email", data.user.email)
-            localStorage.setItem("token", data.user.token)
+            localStorage.setItem("token", data.token.token)
 
             return true
         }
@@ -22,5 +22,11 @@ export default class UserService {
     }
     usuarioAutenticado(){
         return localStorage.getItem("token") !== undefined ? true : false
+    }
+
+    async logout (){
+        localStorage.removeItem("token")
+        localStorage.removeItem("nome")
+        localStorage.removeItem("email")
     }
 }

@@ -21,6 +21,7 @@ export function Login() {
             console.log('response do Login', response)
             if (response === true) {
                 alert('Usuário logado com SUCESSO!')
+                navigate("/home")
             }
             setLoading(false)
         }
